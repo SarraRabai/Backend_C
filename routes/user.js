@@ -1,24 +1,24 @@
 const express = require("express");
 const router = express.Router();
-
 const usersStore = require("../store/users");
-const listingsStore = require("../store/listings");
 const auth = require("../middleware/auth");
 
-router.get("/:id", auth, (req, res) => {
-  const userId = parseInt(req.params.id);
-  const user = usersStore.getUserById(userId);
-  if (!user) return res.status(404).send();
+// Route pour obtenir les informations d'un utilisateur par ID
+router.get("/:id", auth, async (req, res) => {
+  const userId = req.params.id;
 
-  const listings = listingsStore.filterListings(
-    listing => listing.userId === userId
-  );
+  // Trouver l'utilisateur par ID
+  const user = await usersStore.getUserById(userId);
+  if (!user) {
+    return res.status(404).send({ error: "Utilisateur non trouvé." });
+  }
 
+  // Renvoyer les informations de l'utilisateur
   res.send({
-    id: user.id,
+    id: user._id,
     name: user.name,
-    email: user.email,
-    listings: listings.length
+    cin: user.cin,
+    vehicules: user.vehicules,
   });
 });
 

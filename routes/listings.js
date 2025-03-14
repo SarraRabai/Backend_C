@@ -59,20 +59,22 @@ router.post(
   ],
 
   async (req, res) => {
-    console.log("res", req);
-    const listing = {
-      title: req.body.title,
-      price: parseFloat(req.body.price),
-      categoryId: parseInt(req.body.categoryId),
-      description: req.body.description,
-    };
-    // listing.images = req.images?.map((fileName) => ({ fileName: fileName }));
-    if (req.body.location) listing.location = JSON.parse(req.body.location);
-    if (req.user) listing.userId = req.user.userId;
+    console.log("res", req.body);
+    // const listing = {
+    //   title: req.body.title,
+    //   price: parseFloat(req.body.price),
+    //   categoryId: parseInt(req.body.categoryId),
+    //   description: req.body.description,
+    // };
+    // // listing.images = req.images?.map((fileName) => ({ fileName: fileName }));
+    // if (req.body.location) listing.location = JSON.parse(req.body.location);
+    // if (req.user) listing.userId = req.user.userId;
 
-    store.addListing(listing);
+    store.addListing(req.body);
 
-    res.status(201).send(listing);
+    res.status(201).json({
+      message: "success",
+    });
   }
 );
 

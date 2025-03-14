@@ -1,32 +1,43 @@
-const users = [
-  {
-    id: 1,
-    name: "Mosh",
-    email: "mosh@domain.com",
-    password: "12345",
-  },
-  {
-    id: 2,
-    name: "John",
-    email: "john@domain.com",
-    password: "12345",
-  },
-];
+const User = require("../models/User");
 
-const getUsers = () => users;
+const getUsers = async () => {
+  return await User.find();
+};
 
-const getUserById = (id) => users.find((user) => user.id === id);
+const getUserById = async (id) => {
+  return await User.findById(id);
+};
 
-const getUserByEmail = (email) => users.find((user) => user.email === email);
+const getUserByCin = async (cin) => {
+  return await User.findOne({ cin });
+};
 
-const addUser = (user) => {
-  user.id = users.length + 1;
-  users.push(user);
+const addUser = async (user) => {
+  const newUser = new User(user);
+  await newUser.save();
+  return newUser;
+};
+
+const updateUser = async (user) => {
+  return await User.findByIdAndUpdate(user._id, user, { new: true });
+};
+
+const addVehiculeToUser = async (userId, vehicule) => {
+  const user = await User.findById(userId);
+  if (!user) {
+    throw new Error("Utilisateur non trouvé.");
+  }
+
+  user.vehicules.push(vehicule);
+  await user.save();
+  return user;
 };
 
 module.exports = {
   getUsers,
-  getUserByEmail,
   getUserById,
+  getUserByCin,
   addUser,
+  updateUser,
+  addVehiculeToUser,
 };

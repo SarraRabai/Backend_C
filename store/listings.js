@@ -107,6 +107,7 @@ const listings = [
 const addListing = (listing) => {
   listing.id = listings.length + 1;
   listings.push(listing);
+  console.log("last listing", listing);
 };
 
 const getListings = () => listings;
