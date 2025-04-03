@@ -7,10 +7,11 @@ const users = require("./routes/users");
 const user = require("./routes/user");
 const auth = require("./routes/auth");
 const my = require("./routes/my");
-const messages = require("./routes/messages");
+//const messages = require("./routes/messages");
 const expoPushTokens = require("./routes/expoPushTokens");
 const upload = require("./routes/upload");
 const addConstat = require("./routes/addConstat");
+const message = require("./routes/message");
 const helmet = require("helmet");
 const compression = require("compression");
 const config = require("config");
@@ -36,9 +37,10 @@ app.use("/api/users", users);
 app.use("/api/auth", auth);
 app.use("/api/my", my);
 app.use("/api/expoPushTokens", expoPushTokens);
-app.use("/api/messages", messages);
+//app.use("/api/messages", messages);
 app.use("/api/upload", upload);
 app.use("/api/addConstat", addConstat);
+app.use("/api/message", message);
 // Configuration de MongoDB
 const mongoURI = "mongodb://localhost:27017/DataBaseConstat"; // URI MongoDB directement dans le code
 
@@ -52,7 +54,7 @@ mongoose
     process.exit(1); // Quitter l'application en cas d'échec de connexion
   });
 
-const port = process.env.PORT || config.get("port");
+const port = process.env.PORT || config.get("port");  
 app.listen(port, function () {
   console.log(`Server started on port ${port}...`);
 });

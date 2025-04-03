@@ -3,14 +3,14 @@ const router = express.Router();
 const Joi = require("joi");
 const usersStore = require("../store/users");
 const validateWith = require("../middleware/validation");
-const auth = require("../middleware/auth");
+//const auth = require("../middleware/auth");
 const { addVehiculeToUser } = require("../store/users");
 
 // Schéma de validation pour un véhicule
 const vehiculeSchema = {
-  registration: Joi.string().required(), // Immatriculation
-  insuranceStartDate: Joi.date().required(), // Date de début d'assurance
-  insuranceEndDate: Joi.date().required(), // Date de fin d'assurance
+  registration: Joi.string().required(),
+  insuranceStartDate: Joi.date().required(),
+  insuranceEndDate: Joi.date().required(),
 };
 
 // Schéma de validation pour l'utilisateur
@@ -21,9 +21,9 @@ const userSchema = {
   vehicules: Joi.array()
     .items(
       Joi.object({
-        registration: Joi.string().required(), // Immatriculation
-        insuranceStartDate: Joi.date().required(), // Date de début d'assurance
-        insuranceEndDate: Joi.date().required(), // Date de fin d'assurance
+        registration: Joi.string().required(),
+        insuranceStartDate: Joi.date().required(),
+        insuranceEndDate: Joi.date().required(),
       })
     )
     .optional(), // Le champ "vehicles" est optionnel
@@ -55,33 +55,30 @@ router.get("/", async (req, res) => {
 });
 
 // Route pour ajouter un véhicule à un utilisateur
-router.post(
-  "/:userId/vehicules",
-  validateWith(vehiculeSchema),
-  async (req, res) => {
-    console.log("Requête reçue :", req.body); // Log du corps de la requête
-    console.log("ID utilisateur :", req.params.userId); // Log de l'ID utilisateur
+router.post("/:userId/vehicules", async (req, res) => {
+  console.log("Requête reçue :", req.body); // Log du corps de la requête
+  console.log("ID utilisateur :", req.params.userId);
 
-    const { userId } = req.params;
-    const { registration, insuranceStartDate, insuranceEndDate } = req.body;
+  const { userId } = req.params;
+  const { registration, insuranceStartDate, insuranceEndDate } = req.body;
 
-    try {
-      const vehicule = {
-        registration,
-        insuranceStartDate,
-        insuranceEndDate,
-      };
+  try {
+    const vehicule = {
+      registration,
+      insuranceStartDate,
+      insuranceEndDate,
+    };
 
-      const updatedUser = await addVehiculeToUser(userId, vehicule);
-      res.status(201).send(updatedUser);
-    } catch (error) {
-      res.status(500).send({ error: error.message });
-    }
+    const updatedUser = await addVehiculeToUser(userId, vehicule);
+    res.status(201).send(updatedUser);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
   }
-);
+});
 
 // Route pour obtenir les véhicules d'un utilisateur
-router.get("/:userId/vehicules", auth, async (req, res) => {
+//auth,
+router.get("/:userId/vehicules", async (req, res) => {
   const { userId } = req.params;
 
   try {

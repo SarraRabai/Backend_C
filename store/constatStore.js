@@ -1,6 +1,7 @@
 // store/constatStore.js
 const Constat = require("../models/Constat");
 
+
 // Ajouter un constat
 const addConstat = async (constatData) => {
   const newConstat = new Constat(constatData);

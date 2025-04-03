@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { parseDate } = require("../middleware/dateUtils");
 
 const constatSchema = new mongoose.Schema({
-  // Champs de la partie 1 (General_Info)
+  // Champs1 (General_Info)
   date: { type: Date, required: true, set: (value) => parseDate(value) },
   time: { type: String, required: true },
   location: { type: String, required: true },
@@ -11,7 +11,7 @@ const constatSchema = new mongoose.Schema({
   otherDamages: { type: Boolean, required: true },
   witnesses: { type: Boolean },
 
-  // Champs de la partie 2 (VehiculeA)
+  // Champs2 (VehiculeA)
   insuredVehicle: { type: String, required: true },
   contractNumber: { type: String, required: true },
   agency: { type: String, required: true },
@@ -39,6 +39,14 @@ const constatSchema = new mongoose.Schema({
   circumstances: { type: Object, required: true },
   numberOfCheckedBoxes: { type: Number, required: true },
   voiceRecordings: { type: Array, default: [] },
+  frontImage: { type: String, required: false },
+  backImage: { type: String, required: false },
+  leftImage: { type: String, required: false },
+  rightImage: { type: String, required: false },
+  //pour lier à l’accident
+  accidentId: { type: String, required: true, index: true },
+  vehicleType: { type: String, required: true },
+
 });
 
 const Constat = mongoose.model("Constat", constatSchema);

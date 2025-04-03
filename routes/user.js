@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const usersStore = require("../store/users");
-const auth = require("../middleware/auth");
+//const auth = require("../middleware/auth");
 
 // Route pour obtenir les informations d'un utilisateur par ID
-router.get("/:id", auth, async (req, res) => {
+//auth,
+router.get("/:id", async (req, res) => {
   const userId = req.params.id;
 
   // Trouver l'utilisateur par ID

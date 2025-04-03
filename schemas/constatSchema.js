@@ -25,7 +25,8 @@ const constatSchema = Joi.object({
   insuredAddress: Joi.string().required(),
   insuredPhone: Joi.string().required(),
   vehicleBrand: Joi.string().required(),
-  vehicleRegistration: Joi.string().required(),
+  vehicleRegistration: Joi.string(),
+  vehicleType: Joi.string().required(),
   direction: Joi.string().required(),
   comingFrom: Joi.string().required(),
   goingTo: Joi.string().required(),
@@ -33,6 +34,11 @@ const constatSchema = Joi.object({
   circumstances: Joi.object().required(),
   numberOfCheckedBoxes: Joi.number().required(),
   voiceRecordings: Joi.array().items(Joi.string()),
+
+  frontImage: Joi.string().uri().optional().allow(""), // Allow empty string or valid URI
+  backImage: Joi.string().uri().optional().allow(""),
+  leftImage: Joi.string().uri().optional().allow(""),
+  rightImage: Joi.string().uri().optional().allow(""),
 });
 
 module.exports = constatSchema;
