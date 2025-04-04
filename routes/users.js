@@ -16,7 +16,7 @@ const vehiculeSchema = {
 // Schéma de validation pour l'utilisateur
 const userSchema = {
   name: Joi.string().required().min(2),
-  cin: Joi.string().required(), // CIN au lieu de l'email
+  cin: Joi.string().required(), 
   password: Joi.string().required().min(5),
   vehicules: Joi.array()
     .items(

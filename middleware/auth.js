@@ -20,10 +20,10 @@ module.exports = async (req, res, next) => {
     }
 
     req.user = {
-      _id: user._id, // ID MongoDB
-      userId: user._id, // Alias pour compatibilité
-      name: user.name, // Autres champs utiles
-      cin: user.cin, // Exemple de champ supplémentaire
+      _id: user._id, 
+      userId: user._id, 
+      name: user.name, 
+      cin: user.cin, 
     };
     next();
   } catch (err) {
