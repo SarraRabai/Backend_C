@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const usersStore = require("../store/users");
+const usersStore = require("../controller/users");
 //const auth = require("../middleware/auth");
 
 // Route pour obtenir les informations d'un utilisateur par ID

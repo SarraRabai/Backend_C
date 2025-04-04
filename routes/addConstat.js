@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const constatStore = require("../store/constatStore");
+const constatStore = require("../controller/constatController");
 const validateWith = require("../middleware/validation");
 const constatSchema = require("../schemas/constatSchema");
 const Accident = require("../models/Accident");

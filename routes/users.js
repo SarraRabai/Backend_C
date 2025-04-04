@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Joi = require("joi");
-const usersStore = require("../store/users");
+const usersStore = require("../controller/users");
 const validateWith = require("../middleware/validation");
 //const auth = require("../middleware/auth");
-const { addVehiculeToUser } = require("../store/users");
+const { addVehiculeToUser } = require("../controller/users");
 
 // Schéma de validation pour un véhicule
 const vehiculeSchema = {
@@ -16,7 +16,7 @@ const vehiculeSchema = {
 // Schéma de validation pour l'utilisateur
 const userSchema = {
   name: Joi.string().required().min(2),
-  cin: Joi.string().required(), 
+  cin: Joi.string().required(),
   password: Joi.string().required().min(5),
   vehicules: Joi.array()
     .items(
