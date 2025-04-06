@@ -37,7 +37,7 @@ const getUsersForSidebar = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
 
-    const filteredUsers = await User.find({
+    const filteredUsers = await User.find({//find the users that they haven't ni id ni password 
       _id: { $ne: loggedInUserId },
     }).select("-password");
 
