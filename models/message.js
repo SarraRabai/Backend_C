@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const messageSchema = new mongoose.Schema(
   {
     senderId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      type: mongoose.Schema.Types.ObjectId, //clé étrangère
+      ref: "User", //Stocke une référence à un document dans la collection "User"
       required: true,
     },
     receiverId: {
