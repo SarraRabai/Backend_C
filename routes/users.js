@@ -8,6 +8,7 @@ const {
   addVehiculeToUser,
   getUsersForSidebar,
 } = require("../controller/users");
+const auth = require("../middleware/auth");
 
 // Schéma de validation pour un véhicule
 const vehiculeSchema = {
@@ -98,6 +99,6 @@ router.get("/:userId/vehicules", async (req, res) => {
   }
 });
 
-router.get("/", protectRoute, getUsersForSidebar);
+router.get("/", auth, getUsersForSidebar);
 
 module.exports = router;
