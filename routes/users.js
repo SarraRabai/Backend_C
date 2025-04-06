@@ -4,7 +4,10 @@ const Joi = require("joi");
 const usersStore = require("../controller/users");
 const validateWith = require("../middleware/validation");
 //const auth = require("../middleware/auth");
-const { addVehiculeToUser } = require("../controller/users");
+const {
+  addVehiculeToUser,
+  getUsersForSidebar,
+} = require("../controller/users");
 
 // Schéma de validation pour un véhicule
 const vehiculeSchema = {
@@ -94,5 +97,7 @@ router.get("/:userId/vehicules", async (req, res) => {
       .send({ error: "Erreur lors de la récupération des véhicules." });
   }
 });
+
+router.get("/", protectRoute, getUsersForSidebar);
 
 module.exports = router;
