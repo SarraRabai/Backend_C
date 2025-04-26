@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "dev": "nodemon index.js"
   },
   "engines": {
@@ -20,6 +20,7 @@
     "compression": "^1.7.4",
     "config": "^3.3.1",
     "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "expo-server-sdk": "^3.5.0",
     "express": "^4.21.0",
     "gridfs-stream": "^1.1.1",
